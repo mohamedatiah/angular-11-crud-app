@@ -1,45 +1,29 @@
-<div class="list row">
+<div>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Email</th>
+        <th>Edit</th>
+        <th>Delete</th>
 
-  <div class="col-md-6">
-    <h4>drivers List</h4>
-    <ul class="list-group">
-      <li
-        class="list-group-item"
-        *ngFor="let tutorial of drivers; let i = index"
-        [class.active]="i == currentIndex"
-        (click)="setActiveTutorial(tutorial, i)"
-      >
-        {{ tutorial.firstname }}
-      </li>
-    </ul>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of drivers">
+        <td>{{item.firstname}}</td>
+        <td>{{item.lastname}}</td>
+        <td>{{item.email}}</td>
+        <td>  <a class="btn-success" routerLink="/drivers/{{ item.id }}">
+          Edit
+        </a></td>
+        <td>  <a class="btn-success"  (click)="Delete(item.id)">
+          Delete
+        </a></td>
+      </tr>
+    </tbody>
+  </table>
+  
 
-    <button class="m-3 btn btn-sm btn-danger" (click)="removeAlldrivers()">
-      Remove All
-    </button>
-  </div>
-  <div class="col-md-6">
-    <div *ngIf="currentTutorial">
-      <h4>Tutorial</h4>
-      <div>
-        <label><strong>Title:</strong></label> {{ currentTutorial.firstname }}
-      </div>
-      <div>
-        <label><strong>Description:</strong></label>
-        {{ currentTutorial.firstname }}
-      </div>
-      <div>
-        <label><strong>Status:</strong></label>
-        {{ currentTutorial.firstname ? "Published" : "Pending" }}
-      </div>
-
-      <a class="badge badge-warning" routerLink="/drivers/{{ currentTutorial.id }}">
-        Edit
-      </a>
-    </div>
-
-    <div *ngIf="!currentTutorial">
-      <br />
-      <p>Please click on a Tutorial...</p>
-    </div>
-  </div>
 </div>

@@ -14,10 +14,11 @@ export class AddDriverComponent implements OnInit {
   IsNew:boolean=true;
   id:any;
    drivers: Driver = {
+      id:'',
      firstname: '',
      lastname: '',
      email: '',
-     phone:0
+     phone:''
      };
    submitted = false;
  
@@ -25,9 +26,13 @@ export class AddDriverComponent implements OnInit {
      activeRoute.params.subscribe(params => {
     this.id=params['id'];
     if(this.id){
+      console.log(this.id);
+      
      this.IsNew=false;
     this.driverservice.get(this.id).subscribe(a=>{
+      
       this.drivers=a;
+      this.id=a.id;
     })
     }
     console.log(this.id);
@@ -39,15 +44,11 @@ export class AddDriverComponent implements OnInit {
    }
  
    savedrivers(): void {
+    console.log(this.DriverForm?.form.value);
+    
      if(this.DriverForm?.valid){
-     const data = {
-       firstname: this.drivers.firstname,
-       lastname: this.drivers.lastname,
-       phone: this.drivers.phone,
-       email: this.drivers.email,
-     };
- 
-     this.driverservice.create(data)
+      if(this.id){
+     this.driverservice.create(this.DriverForm.value)
        .subscribe(
          response => {
            console.log(response);
@@ -58,8 +59,21 @@ export class AddDriverComponent implements OnInit {
          error => {
            console.log(error);
          });
-       }else{
-         debugger;
+        }else{
+          //update
+          this.driverservice.update(this.id,this.DriverForm.value)
+          .subscribe(
+            response => {
+              console.log(response);
+              this.submitted = true;
+              this.router.navigate(['/drivers']);
+   
+            },
+            error => {
+              console.log(error);
+            });
+        }
+        }else{
          console.log(this.DriverForm);
          
        }

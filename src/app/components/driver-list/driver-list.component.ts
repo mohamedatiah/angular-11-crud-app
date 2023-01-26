@@ -9,12 +9,22 @@ import { DriverService } from 'src/app/services/Driver.service';
 })
 export class DriverListComponent implements OnInit {
 
-  drivers?: Driver[];
+  drivers?: Driver[]=[];
   currentTutorial?: Driver;
   currentIndex = -1;
   title = '';
 
-  constructor(private driverservice: DriverService) { }
+  constructor(private driverservice: DriverService) {
+    var s=new Driver();
+    s.email="s";
+    s.firstname="ss";
+    s.id="ss";
+    s.lastname="sss";
+    this.drivers?.push(s);
+    this.drivers?.push(s);
+    this.drivers?.push(s);
+    this.currentTutorial=s;
+   }
 
   ngOnInit(): void {
     this.retrievedrivers();
@@ -55,19 +65,13 @@ export class DriverListComponent implements OnInit {
         });
   }
 
-  searchTitle(): void {
-    this.currentTutorial = undefined;
-    this.currentIndex = -1;
-
-    this.driverservice.findByTitle(this.title)
-      .subscribe(
-        data => {
-          this.drivers = data;
-          console.log(data);
-        },
-        error => {
-          console.log(error);
-        });
+  Delete(id:any){
+  this.driverservice.delete(id).subscribe(a=>{
+    this.driverservice.getAll().subscribe(a=>{
+      this.drivers=a;
+    })
+    alert("success");
+  })
   }
 
 }

@@ -3,8 +3,6 @@
     <div *ngIf="!submitted">
 
 <form #driverForm="ngForm">
-
-  
     <div class="form-group">
       <label for="firstname">firstname</label>
       <input
@@ -16,7 +14,7 @@
         [ngClass]="{'border-red': driverForm.submitted&&driverForm['controls'].firstname.errors?.required}"
 
       />
-      <div *ngIf="driverForm['controls'].firstname.touched&&driverForm['controls'].firstname.errors?.required" class="text-danger">
+      <div *ngIf="driverForm['controls'].firstname?.touched&&driverForm['controls'].firstname.errors?.required" class="text-danger">
         First Name is required
        </div>
     </div>
@@ -32,7 +30,7 @@
         [ngClass]="{'border-red': driverForm.submitted&&driverForm['controls'].lastname.errors?.required}"
 
       />
-      <div *ngIf="driverForm['controls'].lastname.touched&&driverForm['controls'].lastname.errors?.required" class="text-danger">
+      <div *ngIf="driverForm['controls'].lastname?.touched&&driverForm['controls'].lastname.errors?.required" class="text-danger">
         Last Name is required
        </div>
     </div>
@@ -47,7 +45,7 @@
         [ngClass]="{'border-red': driverForm.submitted&&driverForm['controls'].email.errors?.required}"
 
       />
-      <div *ngIf="driverForm['controls'].email.touched&&driverForm['controls'].email.errors?.required" class="text-danger">
+      <div *ngIf="driverForm['controls'].email?.touched&&driverForm['controls'].email.errors?.required" class="text-danger">
         Email is required
        </div>
     </div>
@@ -59,16 +57,15 @@
         required
         [(ngModel)]="drivers.phone"
         name="phone"
-        [ngClass]="{'border-red': driverForm.submitted&&driverForm['controls'].phone.errors?.required}"
+        [ngClass]="{'border-red': driverForm?.submitted&&driverForm['controls'].phone.errors?.required}"
 
       />
-      <div *ngIf="driverForm['controls'].phone.touched&&driverForm['controls'].phone.errors?.required" class="text-danger">
+      <div *ngIf="driverForm['controls'].phone?.touched&&driverForm['controls'].phone.errors?.required" class="text-danger">
         Phone is required
        </div>
     </div>
 
-  <button *ngIf="IsNew" type="submit" (click)="savedrivers()" class="btn btn-success">Submit</button>
-  <button *ngIf="!IsNew" type="submit" (click)="updatedrivers()" class="btn btn-success">Update</button>
+  <button  type="submit" (click)="savedrivers()" class="btn btn-success">Submit</button>
 
 </form>
      
