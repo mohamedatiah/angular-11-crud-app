@@ -25,6 +25,7 @@ export class AddDriverComponent implements OnInit {
      activeRoute.params.subscribe(params => {
     this.id=params['id'];
     if(this.id){
+     this.IsNew=false;
     this.driverservice.get(this.id).subscribe(a=>{
       this.drivers=a;
     })
