@@ -50,18 +50,18 @@
        </div>
     </div>
     <div class="form-group">
-      <label for="phone">phone</label>
+      <label for="phoneNumber">phoneNumber</label>
       <input
         class="form-control"
         id="description"
         required
-        [(ngModel)]="drivers.phone"
-        name="phone"
-        [ngClass]="{'border-red': driverForm?.submitted&&driverForm['controls'].phone.errors?.required}"
+        [(ngModel)]="drivers.phoneNumber"
+        name="phoneNumber"
+        [ngClass]="{'border-red': driverForm?.submitted&&driverForm['controls'].phoneNumber.errors?.required}"
 
       />
-      <div *ngIf="driverForm['controls'].phone?.touched&&driverForm['controls'].phone.errors?.required" class="text-danger">
-        Phone is required
+      <div *ngIf="driverForm['controls'].phoneNumber?.touched&&driverForm['controls'].phoneNumber.errors?.required" class="text-danger">
+        phoneNumber is required
        </div>
     </div>
 

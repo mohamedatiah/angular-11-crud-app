@@ -4,7 +4,7 @@ export class Driver {
     firstname?: string;
     lastname?: string;
     email?: string;
-    phone?: string;
+    phoneNumber?: string;
 
   }
   

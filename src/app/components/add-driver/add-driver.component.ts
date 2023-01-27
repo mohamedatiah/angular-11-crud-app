@@ -18,7 +18,7 @@ export class AddDriverComponent implements OnInit {
      firstname: '',
      lastname: '',
      email: '',
-     phone:''
+     phoneNumber:''
      };
    submitted = false;
  
@@ -30,9 +30,10 @@ export class AddDriverComponent implements OnInit {
       
      this.IsNew=false;
     this.driverservice.get(this.id).subscribe(a=>{
-      
-      this.drivers=a;
-      this.id=a.id;
+      if(a.IsSuccess){
+      this.drivers=a.Result||new Driver();
+      this.id=a.Result?.id;
+      }
     })
     }
     console.log(this.id);

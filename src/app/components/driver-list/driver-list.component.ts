@@ -15,15 +15,11 @@ export class DriverListComponent implements OnInit {
   title = '';
 
   constructor(private driverservice: DriverService) {
-    var s=new Driver();
-    s.email="s";
-    s.firstname="ss";
-    s.id="ss";
-    s.lastname="sss";
-    this.drivers?.push(s);
-    this.drivers?.push(s);
-    this.drivers?.push(s);
-    this.currentTutorial=s;
+     this.driverservice.getAll().subscribe(a=>{
+       if(a.IsSuccess){      
+      this.drivers=a.Result;
+       }
+     })
    }
 
   ngOnInit(): void {
@@ -34,7 +30,9 @@ export class DriverListComponent implements OnInit {
     this.driverservice.getAll()
       .subscribe(
         data => {
-          this.drivers = data;
+          if(data.IsSuccess){
+          this.drivers = data.Result;
+          }
           console.log(data);
         },
         error => {
@@ -68,7 +66,10 @@ export class DriverListComponent implements OnInit {
   Delete(id:any){
   this.driverservice.delete(id).subscribe(a=>{
     this.driverservice.getAll().subscribe(a=>{
-      this.drivers=a;
+      if(a.IsSuccess){
+        this.drivers=a.Result;
+
+      }
     })
     alert("success");
   })

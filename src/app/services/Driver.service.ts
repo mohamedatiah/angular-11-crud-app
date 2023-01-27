@@ -3,8 +3,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Driver } from '../models/Driver';
+import { environment } from 'src/environments/environment';
+import { ApiResponse } from '../models/ApiResponse';
 
-const baseUrl = 'http://localhost:8080/api/tutorials';
+const baseUrl = environment.apiUrl;
 
 @Injectable({
   providedIn: 'root'
@@ -13,12 +15,13 @@ export class DriverService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<Driver[]> {
-    return this.http.get<Driver[]>(baseUrl);
+  getAll(): Observable<ApiResponse<Driver[]>> {
+
+    return this.http.get<ApiResponse<Driver[]>>(baseUrl);
   }
 
-  get(id: any): Observable<Driver> {
-    return this.http.get(`${baseUrl}/${id}`);
+  get(id: any): Observable<ApiResponse<Driver>> {
+    return this.http.get<ApiResponse<Driver>>(`${baseUrl}/${id}`);
   }
 
   create(data: any): Observable<any> {
@@ -37,8 +40,8 @@ export class DriverService {
     return this.http.delete(baseUrl);
   }
 
-  findByTitle(title: any): Observable<Driver[]> {
-    return this.http.get<Driver[]>(`${baseUrl}?title=${title}`);
+  findByTitle(title: any): Observable<ApiResponse<Driver[]>> {
+    return this.http.get<ApiResponse<Driver[]>>(`${baseUrl}?title=${title}`);
   }
 }
 
